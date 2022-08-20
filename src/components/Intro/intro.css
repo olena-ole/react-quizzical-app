@@ -1,0 +1,32 @@
+.intro__title {
+    font-family: 'Karla';
+    font-weight: 700;
+    font-size: 31px;
+}
+
+.intro__descr {
+    margin-top: 7px;
+}
+
+.intro__btn {
+    margin-top: 29px;
+    padding: 16px 29px;
+
+    background: #4D5B9E;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #F5F7FB;
+}
+
+.intro__btn:hover,
+.intro__btn:focus,
+.intro__btn:focus-visible {
+    outline: none;
+    scale: 1.01;
+}

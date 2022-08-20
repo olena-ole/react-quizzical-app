@@ -1,4 +1,29 @@
-.App {
+.app {
+  position: relative;
+  min-height: 550px;
+  width: 550px;
+
+  color: #293264;
+  background-color: #F5F7FB;
+}
+
+.app-intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
+
+.top__blob {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.bottom__blob {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 
