@@ -3,35 +3,39 @@ import './answer.css';
 import { nanoid } from 'nanoid';
 
 export default function Answer(props) {
-    console.log(props)
 
-    function generateAnswers(wrongArr, rightAns) {
-        const randomIndex = Math.floor(Math.random() * (wrongArr.length + 1));
-        wrongArr.splice(randomIndex, 0, rightAns);
-        return wrongArr;
-    }
+    const [selectedOption, setSelectedOption] = React.useState('');
 
-    const answersArray = generateAnswers(props.data.incorrect_answers, props.data.correct_answer);
-    const radioInputs = answersArray.map(item => {
+    function onValueChange(e) {
+        console.log(e.target.value)
+        setSelectedOption(e.target.value);
+    };
+    // allAnswers: (4) ['Florida', 'California', 'Pennsylvania', 'New%20Jersey']
+    // correctAnswer: "Pennsylvania"
+    // question: "In%20which%20state%20of%20America%20was%20the%20Fresh%20Prince%20of%2
+
+    console.log(props);
+    
+    const radioInputs = props.allAnswers.map(answer => {
         return (
             <div className="radio" key={nanoid()}>
                 <label>
-                    {/* <input
+                    <input
                     type="radio"
                     value={answer}
                     checked={selectedOption === answer}
                     onChange={onValueChange}
-                    /> */}
-                    {item}
+                    /> 
+                    {decodeURIComponent(answer)}
                 </label>
             </div>
         )
-    }) 
+    }); 
 
 
         return (
             <>
-                <p>{props.data.question}</p>
+                <p>{decodeURIComponent(props.question)}</p>
                 {radioInputs}
             </>
             
