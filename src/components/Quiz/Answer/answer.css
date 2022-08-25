@@ -1,4 +1,4 @@
-.answer-wrapper {
+.answer__wrapper {
     padding: 15px 0;
     border-bottom: 1px solid #DBDEF0;
 }
@@ -10,12 +10,12 @@
     line-height: 19px;
 }
 
-.answer-variants {
+.answer__variants {
     display: flex;
     flex-wrap: wrap;
 }
 
-.answer-variant {
+.answer__variant {
     margin-top: 12px;
     margin-right: 13px;
     padding: 4px 15px;
@@ -34,6 +34,6 @@ input[type="radio"] {
     appearance: none;
 }
 
-input[type="radio"]:checked + .answer-variant{
+input[type="radio"]:checked + .answer__variant{
     background: #D6DBF5;
 }

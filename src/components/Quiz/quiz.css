@@ -1,7 +1,20 @@
-.submit__btn {
-    display: block;
-    margin: 0 auto;
+.quiz__results {
     margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.quiz__results > * {
+    margin-right: 20px;
+}
+
+.quiz__score {
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.btn {
     padding: 11px 22px;
 
     background: #4D5B9E;
@@ -15,11 +28,17 @@
     color: #F5F7FB;
 }
 
-.submit__btn:focus-visible {
+.submit__btn {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.btn:focus-visible {
     outline: none;
 }
 
-.submit__btn:hover,
-.submit__btn:focus {
+.btn:hover,
+.btn:focus {
     transform: scale(1.01);
 }

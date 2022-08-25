@@ -26,7 +26,7 @@ export default function Answer(props) {
                     checked={selectedOption === answer}
                     onChange={onValueChange}
                 /> 
-                <label className="answer-variant" key={nanoid()} htmlFor={answer}>
+                <label className="answer__variant" key={nanoid()} htmlFor={answer}>
                     {decodeURIComponent(answer)}
                 </label>
             </>
@@ -36,9 +36,9 @@ export default function Answer(props) {
 
 
         return (
-            <div className="answer-wrapper">
+            <div className="answer__wrapper">
                 <h2 className="question">{decodeURIComponent(props.question)}</h2>
-                <div className="answer-variants">{radioInputs}</div>
+                <div className="answer__variants">{radioInputs}</div>
             </div>
             
         )

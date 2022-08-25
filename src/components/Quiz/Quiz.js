@@ -14,11 +14,13 @@ import { nanoid } from 'nanoid';
 
 export default function Quiz() {
 
-    let [data, setData] = React.useState([]);
+    const [data, setData] = React.useState([]);
+    const [isSubmitted, setIsSubmitted] = React.useState(false);
+
     React.useEffect( () => {
         fetch('https://opentdb.com/api.php?amount=5&type=multiple&encode=url3986')
             .then(res => res.json())
-            .then(data => setData(data.results))
+            .then(data => setData(data.results));
     }, []);
 
     function generateAnswers(wrongArr, rightAns) {
@@ -28,17 +30,31 @@ export default function Quiz() {
         return allAnswers;
     }
 
-    const questionEls = data.map(item => <Answer 
-                                            correctAnswer={item.correct_answer}
-                                            question={item.question}
-                                            key={nanoid()} 
-                                            allAnswers={generateAnswers(item.incorrect_answers, item.correct_answer)}
-                                        />);
+    function showResults() {
+        setIsSubmitted(true);
+    };
+
+    const questionEls = data.map(item => {
+        return (
+            <Answer 
+                correctAnswer={item.correct_answer}
+                question={item.question}
+                key={nanoid()} 
+                allAnswers={generateAnswers(item.incorrect_answers, item.correct_answer)}
+            />
+        );
+    });
 
     return (
-        <form className="quiz">
+        <div className="quiz">
             {questionEls}
-            <button className="submit__btn" >Check answers</button>
-        </form>
+            {isSubmitted ? 
+                <div className="quiz__results">
+                    <p className="quiz__score">You scored 3/5 correct answers</p>
+                    <button className="btn">Play again</button>
+                </div> : 
+                <button className="btn submit__btn" onClick={showResults}>Check answers</button>
+            }
+        </div>
     );
 };
