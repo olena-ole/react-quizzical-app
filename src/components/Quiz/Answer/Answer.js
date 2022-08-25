@@ -18,26 +18,28 @@ export default function Answer(props) {
     
     const radioInputs = props.allAnswers.map(answer => {
         return (
-            <div className="radio" key={nanoid()}>
-                <label>
-                    <input
+            <>
+                <input
+                    id={answer}
                     type="radio"
                     value={answer}
                     checked={selectedOption === answer}
                     onChange={onValueChange}
-                    /> 
+                /> 
+                <label className="answer-variant" key={nanoid()} htmlFor={answer}>
                     {decodeURIComponent(answer)}
                 </label>
-            </div>
+            </>
+            
         )
     }); 
 
 
         return (
-            <>
-                <p>{decodeURIComponent(props.question)}</p>
-                {radioInputs}
-            </>
+            <div className="answer-wrapper">
+                <h2 className="question">{decodeURIComponent(props.question)}</h2>
+                <div className="answer-variants">{radioInputs}</div>
+            </div>
             
         )
     }

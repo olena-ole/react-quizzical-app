@@ -1,5 +1,25 @@
-.quiz {
+.submit__btn {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 11px 22px;
+
+    background: #4D5B9E;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 11px;
+    color: #F5F7FB;
 }
 
-.submit__btn {
+.submit__btn:focus-visible {
+    outline: none;
+}
+
+.submit__btn:hover,
+.submit__btn:focus {
+    transform: scale(1.01);
 }

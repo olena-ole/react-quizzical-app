@@ -17,6 +17,8 @@
 }
 
 .app-quiz {
+  padding: 25px 75px;
+  color: #293264;
   z-index: 1;
 }
 
