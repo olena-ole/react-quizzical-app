@@ -11,10 +11,12 @@ export default function Quiz(props) {
 
     const [isSubmitted, setIsSubmitted] = React.useState(false);
     const [selectedOptions, setSelectedOptions] = React.useState(props.data.map(item => item.selectedOption));
-    console.log(selectedOptions);
+    const [rightAnswersCount, setRightAnswersCount] = React.useState(0);
 
     function showResults(e) {
         e.preventDefault();
+        const rightAnswers = selectedOptions.filter((option, i) => option === props.data[i].correctAnswer).length;
+        setRightAnswersCount(rightAnswers);
         setIsSubmitted(true);
     };
 
@@ -30,6 +32,12 @@ export default function Quiz(props) {
             })
         });
     };
+
+    function startNewGame() {
+        props.newGame();
+        setIsSubmitted(false);
+        setRightAnswersCount(0);
+    }
 
     const questionEls = props.data.map((item, i) => {
 
@@ -65,8 +73,8 @@ export default function Quiz(props) {
             {questionEls}
             {isSubmitted ? 
                 <div className="quiz__results">
-                    <p className="quiz__score">You scored 3/5 correct answers</p>
-                    <button className="btn">Play again</button>
+                    <p className="quiz__score">You scored {rightAnswersCount}/5 correct answers</p>
+                    <button className="btn" onClick={startNewGame}>Play again</button>
                 </div> : 
                 <button className="btn submit__btn" onClick={showResults}>Check answers</button>
             }
