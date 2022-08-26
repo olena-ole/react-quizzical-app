@@ -1,47 +1,62 @@
 import React from 'react';
 import './quiz.css';
-import Answer from './Answer/Answer';
 import { nanoid } from 'nanoid';
 
-// props.data = { 
-//     category: "Entertainment: Comics",
-//     correct_answer: "Mr. Spittle",
-//     difficulty: "medium",
-//     incorrect_answers: ["Mr. Boreman", "Mr. Spitling", "Mr. Moe"],
-//     question: "In Calvin and Hobbes, what is the name of the principal at Calvin&#039;s school?",
-//     type: "multiple"
-// }
+// allAnswers: (4) ['Florida', 'California', 'Pennsylvania', 'New%20Jersey']
+// correctAnswer: "Pennsylvania"
+// question: "In%20which%20state%20of%20America%20was%20the%20Fresh%20Prince%20of%2
+// selectedOption: ""
 
-export default function Quiz() {
+export default function Quiz(props) {
 
-    const [data, setData] = React.useState([]);
     const [isSubmitted, setIsSubmitted] = React.useState(false);
+    const [selectedOptions, setSelectedOptions] = React.useState(props.data.map(item => item.selectedOption));
+    console.log(selectedOptions);
 
-    React.useEffect( () => {
-        fetch('https://opentdb.com/api.php?amount=5&type=multiple&encode=url3986')
-            .then(res => res.json())
-            .then(data => setData(data.results));
-    }, []);
-
-    function generateAnswers(wrongArr, rightAns) {
-        const randomIndex = Math.floor(Math.random() * (wrongArr.length + 1));
-        const allAnswers = [...wrongArr];
-        allAnswers.splice(randomIndex, 0, rightAns);
-        return allAnswers;
-    }
-
-    function showResults() {
+    function showResults(e) {
+        e.preventDefault();
         setIsSubmitted(true);
     };
 
-    const questionEls = data.map(item => {
+    function onValueChange(e, i) {
+        console.log(e.target.value);
+        setSelectedOptions(prev => {
+            return prev.map((option, index) => {
+                if (i === index) {
+                    return e.target.value;
+                } else {
+                    return option;
+                }
+            })
+        });
+    };
+
+    const questionEls = props.data.map((item, i) => {
+
+        const radioInputs = item.allAnswers.map(answer => {
+            return (
+                <div key={nanoid()} className="answer__variant__wrapper">
+                    <input
+                        disabled={isSubmitted ? true : false}
+                        id={answer}
+                        type="radio"
+                        value={answer}
+                        checked={selectedOptions[i] === answer}
+                        onChange={(e) => onValueChange(e, i)}
+                    /> 
+                    <label className="answer__variant"  htmlFor={answer}>
+                        {decodeURIComponent(answer)}
+                    </label>
+                </div>
+                
+            )
+        });
+
         return (
-            <Answer 
-                correctAnswer={item.correct_answer}
-                question={item.question}
-                key={nanoid()} 
-                allAnswers={generateAnswers(item.incorrect_answers, item.correct_answer)}
-            />
+            <div className="answer__wrapper" key={nanoid()}>
+                <h2 className="question">{decodeURIComponent(item.question)}</h2>
+                <div className="answer__variants">{radioInputs}</div>
+            </div>    
         );
     });
 
