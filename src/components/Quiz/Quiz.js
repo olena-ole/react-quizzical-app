@@ -2,11 +2,6 @@ import React from 'react';
 import './quiz.css';
 import { nanoid } from 'nanoid';
 
-// allAnswers: (4) ['Florida', 'California', 'Pennsylvania', 'New%20Jersey']
-// correctAnswer: "Pennsylvania"
-// question: "In%20which%20state%20of%20America%20was%20the%20Fresh%20Prince%20of%2
-// selectedOption: ""
-
 export default function Quiz(props) {
 
     const [isSubmitted, setIsSubmitted] = React.useState(false);
@@ -34,14 +29,29 @@ export default function Quiz(props) {
     };
 
     function startNewGame() {
-        props.newGame();
-        setIsSubmitted(false);
         setRightAnswersCount(0);
+        setIsSubmitted(false);
+        props.newGame();
     }
 
     const questionEls = props.data.map((item, i) => {
 
         const radioInputs = item.allAnswers.map(answer => {
+
+            const styles = {
+                background: isSubmitted 
+                            ? 
+                            answer === item.correctAnswer ? '#94D7A2' : 
+                                selectedOptions[i] === answer && selectedOptions[i] !== item.correctAnswer ? '#F8BCBC' : 'transparent'
+                            :
+                            selectedOptions[i] === answer ? '#D6DBF5' : 'transparent',
+                border: isSubmitted
+                        ?
+                        answer === item.correctAnswer || (selectedOptions[i] === answer && selectedOptions[i] !== item.correctAnswer) ? 'none' : '1px solid #4D5B9E'
+                        :
+                        selectedOptions[i] === answer ? 'none' : '1px solid #4D5B9E'
+            };
+
             return (
                 <div key={nanoid()} className="answer__variant__wrapper">
                     <input
@@ -52,7 +62,9 @@ export default function Quiz(props) {
                         checked={selectedOptions[i] === answer}
                         onChange={(e) => onValueChange(e, i)}
                     /> 
-                    <label className="answer__variant"  htmlFor={answer}>
+                    <label className="answer__variant"  
+                        htmlFor={answer}
+                        style={styles}>
                         {decodeURIComponent(answer)}
                     </label>
                 </div>

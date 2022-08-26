@@ -86,4 +86,5 @@ input[type="radio"] {
 
 input[type="radio"]:checked + .answer__variant{
     background: #D6DBF5;
+    border: none;
 }
