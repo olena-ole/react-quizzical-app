@@ -16,7 +16,6 @@ export default function Quiz(props) {
     };
 
     function onValueChange(e, i) {
-        console.log(e.target.value);
         setSelectedOptions(prev => {
             return prev.map((option, index) => {
                 if (i === index) {

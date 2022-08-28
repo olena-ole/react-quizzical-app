@@ -20,8 +20,6 @@ function App() {
   const [data, setData] = React.useState([]);
   const [playAgain, setPlayAgain] = React.useState(true);
 
-  console.log(playAgain);
-
   React.useEffect( () => {
     if (playAgain) {
       fetch('https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple&encode=url3986')
